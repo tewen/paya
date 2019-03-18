@@ -1,0 +1,55 @@
+{
+  "name": "paya",
+  "version": "0.0.1",
+  "description": "Node module for the Paya payment API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha \"test/unit/**/*.spec.js\" && npm run lint",
+    "test:watch": "mocha --watch \"test/unit/**/*.spec.js\"",
+    "lint": "eslint lib test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tewen/paya.git"
+  },
+  "engines": {
+    "node": ">=7.6.0",
+    "npm": ">=4.1.2"
+  },
+  "keywords": [
+    "Payment",
+    "Pay",
+    "ACH",
+    "Banking",
+    "Bank",
+    "Checking",
+    "Savings",
+    "Void",
+    "Transaction",
+    "Invoice",
+    "Billing"
+  ],
+  "author": "Trevor Ewen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tewen/paya/issues"
+  },
+  "homepage": "https://github.com/tewen/paya",
+  "dependencies": {
+    "deep-cuts": "^1.1.0",
+    "es6-error": "^4.1.1",
+    "fs-extra": "^7.0.1",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "dotenv": "^6.2.0",
+    "eslint": "^5.15.0",
+    "eslint-plugin-node": "^8.0.1",
+    "mocha": "^6.0.1",
+    "prompts": "^2.0.3",
+    "proxyquire": "^2.1.0",
+    "sinon": "^7.2.4",
+    "sinon-chai": "^3.3.0"
+  }
+}
