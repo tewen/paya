@@ -1,3 +1,3 @@
-module.exports = () => {
-  console.log('Not yet implemented.');
-};
+const Client = require('./lib/client');
+
+module.exports = Client;

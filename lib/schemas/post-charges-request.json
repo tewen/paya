@@ -1,0 +1,284 @@
+{
+  "secCode": {
+    "type": "string",
+    "description": "Identifies the way in which the payment has been authorized. Allowed Values are 'PPD','CCD', 'ARC','WEB','TEL','RCK'",
+    "enum": [
+      "PPD",
+      "CCD",
+      "ARC",
+      "WEB",
+      "TEL",
+      "RCK"
+    ]
+  },
+  "originatorId": {
+    "type": "string",
+    "description": "10 Digit Originator ID assigned by Sage for each transaction class or business purpose",
+    "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+  },
+  "amounts": {
+    "type": "object",
+    "properties": {
+      "total": {
+        "type": "number",
+        "format": "double",
+        "description": "The total amount of the transaction"
+      },
+      "tax": {
+        "type": "number",
+        "format": "double",
+        "description": "The amount coming from tax"
+      },
+      "shipping": {
+        "type": "number",
+        "format": "double",
+        "description": "The amount coming from shipping charges"
+      }
+    }
+  },
+  "account": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "The type of bank account from which the funds are being withdrawn",
+        "enum": [
+          "Checking",
+          "Savings"
+        ]
+      },
+      "routingNumber": {
+        "type": "string",
+        "description": "The customer's account routing number",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "accountNumber": {
+        "type": "string",
+        "description": "The customer's account number",
+        "pattern": "^[\\w\\-\\s\\/\\+\\=]{1,}$"
+      },
+      "priorReference": {
+        "type": "string",
+        "description": "The presence of this value indicates that Number is an encrypted number belonging to the transaction with this reference.\r\n            The web service will decrypt this number and pass the decrypted number to the processor"
+      }
+    }
+  },
+  "checkNumber": {
+    "type": "integer",
+    "format": "int32",
+    "description": "The check number on the check used to process the ACH transaction"
+  },
+  "customer": {
+    "type": "object",
+    "properties": {
+      "dateOfBirth": {
+        "type": "string",
+        "format": "date-time",
+        "description": "The customer's date of birth"
+      },
+      "ssn": {
+        "type": "string",
+        "description": "The customer's social security number",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "license": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "The driver's license number",
+            "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+          },
+          "stateCode": {
+            "type": "string",
+            "description": "The two-letter abbreviation of the state that issued the driver's license",
+            "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+          }
+        }
+      },
+      "ein": {
+        "type": "string",
+        "description": "The customer's federal tax ID",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "email": {
+        "type": "string",
+        "description": "The customer's email address"
+      },
+      "telephone": {
+        "type": "string",
+        "description": "The customer's telephone number",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "fax": {
+        "type": "string",
+        "description": "The customer's fax number",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      }
+    }
+  },
+  "billing": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "object",
+        "properties": {
+          "first": {
+            "type": "string",
+            "description": "The customer's first name",
+            "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+          },
+          "middle": {
+            "type": "string",
+            "description": "The customer's middle name or initial",
+            "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+          },
+          "last": {
+            "type": "string",
+            "description": "The customer's last name",
+            "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+          },
+          "suffix": {
+            "type": "string",
+            "description": "The suffix appended to the customer's name",
+            "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+          }
+        }
+      },
+      "address": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "city": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "state": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "postalCode": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "country": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      }
+    }
+  },
+  "shipping": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "address": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "city": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "state": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "postalCode": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "country": {
+        "type": "string",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      }
+    }
+  },
+  "orderNumber": {
+    "type": "string",
+    "description": "A client-supplied order number to identify the transaction",
+    "pattern": "^([\\.\\,\\:\\;\\|\\=\\+\\^\\-\\'\\$\\w\\s\\#\\!\\$\\?\\%\\&\\/\\\\]){0,}$"
+  },
+  "addenda": {
+    "type": "string",
+    "description": "Additional information about the transaction to be passed to the customer's bank",
+    "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+  },
+  "isRecurring": {
+    "type": "boolean",
+    "description": "Indicates whether this transaction is part of a recurring series"
+  },
+  "recurringSchedule": {
+    "type": "object",
+    "properties": {
+      "amount": {
+        "type": "number",
+        "format": "double",
+        "description": "Recurring amount"
+      },
+      "frequency": {
+        "type": "string",
+        "description": "The frequency at which the transaction should be processed",
+        "enum": [
+          "Monthly",
+          "Daily"
+        ]
+      },
+      "interval": {
+        "type": "integer",
+        "format": "int32",
+        "description": "Recurring interval"
+      },
+      "nonBusinessDaysHandling": {
+        "type": "string",
+        "description": "Specifies how the transaction should be processed if the processing date occurrs on a weekend or holiday",
+        "enum": [
+          "After",
+          "Before",
+          "ThatDay"
+        ]
+      },
+      "startDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "The date the recurring transactions should start"
+      },
+      "totalCount": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The total number of times the transaction should take place.  If null, it will occur indefinitely"
+      },
+      "groupId": {
+        "type": "string",
+        "description": "Recurring Group ID under which the recurring transaction will be added",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      }
+    }
+  },
+  "vault": {
+    "type": "object",
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "The Vault record token to use during a Read or Update operation",
+        "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$"
+      },
+      "operation": {
+        "type": "string",
+        "description": "The type of operation being requested. Values can be 'Read', 'Update' or 'Create'.",
+        "enum": [
+          "Read",
+          "Update",
+          "Create"
+        ]
+      }
+    }
+  },
+  "memo": {
+    "type": "string",
+    "description": "Memo or special instructions",
+    "pattern": "^([\\.\\,\\:\\;\\|\\=\\+\\^\\-\\'\\$\\w\\s\\#\\!\\$\\?\\%\\&\\/\\\\]){0,}$"
+  }
+}
