@@ -46,10 +46,35 @@ const response = await client.ach.postTokens({
 })
 ```
 
+#### ach.putToken(tokenId, data)
+
+[Paya Documentation](https://developer.sagepayments.com/ach/apis/put/tokens/%7Breference%7D)
+
+Used to update the account data associated with a vault token.
+
+```JavaScript
+const response = await client.ach.putToken(tokenId, {
+    account: {
+        type: '',
+        routingNumber: '',
+        accountNumber: '',
+    });
+})
+```
+
+#### ach.deleteToken(tokenId    )
+
+[Paya Documentation](https://developer.sagepayments.com/ach/apis/delete/tokens/%7Breference%7D)
+
+Used to delete a vault token.
+
+```JavaScript
+const response = await client.ach.deleteToken(tokenId);
+})
+```
+
 ### Upcoming Additions
 
-* ach.putToken()
-* ach.deleteToken()
 * ach.postCharges()
 * ach.getCharges()
 
