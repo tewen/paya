@@ -4,6 +4,7 @@ const { getAuthorization, getNonce, getRoute, getTimestamp } = require('../../..
 describe('api/helpers/request', function () {
   describe('getAuthorization()', function () {
     const hmacKey = 'c5DAKh3a6fhf6ZicZMo6lVn/Wj8808Ni2Sg+eui/0m1mNrYxdLXLXeGcEbxZxXpViEjfLKuLP+a2by1lIoEr/Q==';
+    const hmacKeyNoData = 'Zasr8D+NkeqSGs3Jus2dw7BBHMw5YMZVLBmI+tsHH+8iaxloId5gKCzKAQJb9rn+vcDqvm11d1X+JC6EgpBgqw==';
     
     it('should return hmac key', function () {
       expect(getAuthorization({
@@ -27,6 +28,18 @@ describe('api/helpers/request', function () {
         timestamp: 't',
         clientSecret: 'c',
       })).to.not.equal(hmacKey);
+    });
+
+    it('should return hmac key for a request without data', function () {
+      expect(getAuthorization({
+        method: 'm',
+        uri: 'u',
+        data: undefined,
+        merchantId: 'm',
+        nonce: 'n',
+        timestamp: 't',
+        clientSecret: 'c',
+      })).to.equal(hmacKeyNoData);
     });
   });
 

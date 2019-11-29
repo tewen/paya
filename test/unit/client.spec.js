@@ -165,6 +165,28 @@ describe('client', function () {
       });
     });
   
+    describe('deleteToken()', function () {
+      it('should call payaRequest()', function () {
+        const tokenId = 'tokenId';
+        ach.deleteToken(tokenId);
+        expect(payaRequest).to.have.been.calledOnce;
+        expect(payaRequest).to.have.been.calledWith({
+          method: 'DELETE',
+          route: `tokens/${tokenId}`,
+          clientId: 'ci',
+          clientSecret: 'cs',
+          domain: 'https://api-cert.sagepayments.com/ach/v1',
+          merchantId: 'mi',
+          merchantKey: 'mk',
+        });
+      });
+  
+      it('should return a promise that resolves from the result of payaRequest()', async function () {
+        const response = await ach.deleteToken();
+        expect(response).to.eql({ state: 'SUCCESSFUL' });
+      });
+    });
+  
     describe('getCharges()', function () {
       it('should throw a NotImplementedError', function () {
         expect(() => ach.getCharges()).to.throw(NotImplementedError);
@@ -174,12 +196,6 @@ describe('client', function () {
     describe('postCharges()', function () {
       it('should throw a NotImplementedError', function () {
         expect(() => ach.postCharges()).to.throw(NotImplementedError);
-      });
-    });
-  
-    describe('deleteToken()', function () {
-      it('should throw a NotImplementedError', function () {
-        expect(() => ach.deleteToken()).to.throw(NotImplementedError);
       });
     });
   });
