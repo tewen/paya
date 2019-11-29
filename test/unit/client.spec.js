@@ -2,7 +2,7 @@ const chai = require('chai');
 const { expect } = chai;
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');
-const { InitializationError, SchemaValidationError, NotImplementedError } = require('../../lib/util/error');
+const { InitializationError, SchemaValidationError } = require('../../lib/util/error');
 
 chai.use(require('sinon-chai'))
 
@@ -137,6 +137,33 @@ describe('client', function () {
       });
     });
     
+    describe('getCharges()', function () {
+      it('should call payaRequest()', function () {
+        const query = { data: 'in' };
+        ach.getCharges(query);
+        expect(payaRequest).to.have.been.calledOnce;
+        expect(payaRequest).to.have.been.calledWith({
+          method: 'GET',
+          route: 'charges',
+          query,
+          clientId: 'ci',
+          clientSecret: 'cs',
+          domain: 'https://api-cert.sagepayments.com/ach/v1',
+          merchantId: 'mi',
+          merchantKey: 'mk',
+        });
+      });
+  
+      it('should return a promise that resolves from the result of payaRequest()', async function () {
+        const response = await ach.getCharges();
+        expect(response).to.eql({ state: 'SUCCESSFUL' });
+      });
+  
+      it('should throw an error if input validation fails', function () {
+        expect(() => ach.getCharges('notValid')).to.throw(SchemaValidationError);
+      });
+    });
+    
     describe('postTokens()', function () {
       it('should call payaRequest()', function () {
         const data = { data: 'in' };
@@ -211,12 +238,6 @@ describe('client', function () {
       it('should return a promise that resolves from the result of payaRequest()', async function () {
         const response = await ach.deleteToken();
         expect(response).to.eql({ state: 'SUCCESSFUL' });
-      });
-    });
-  
-    describe('getCharges()', function () {
-      it('should throw a NotImplementedError', function () {
-        expect(() => ach.getCharges()).to.throw(NotImplementedError);
       });
     });
   });

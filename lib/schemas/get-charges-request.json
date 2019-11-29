@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "startDate": {
+      "type": "string",
+      "description": "Returns records on or after this date"
+    },
+    "endDate": {
+      "type": "string",
+      "description": "Returns records on or before this date"
+    },
+    "pageSize": {
+      "type": "number",
+      "description": "The number of items to be included in each page of the result set"
+    },
+    "pageNumber": {
+      "type": "number",
+      "description": "The page number of the result set to return"
+    },
+    "sortDirection": {
+      "type": "string",
+      "description": "The direction in which results should be sorted"
+    },
+    "sortField": {
+      "type": "string",
+      "description": "The field on which results should be sorted. This can be any field in the response object"
+    },
+    "name": {
+      "type": "string",
+      "description": "Used to query charges by various criteria including amount, date, order number, type, etc. Results include both summarized information and itemized detail"
+    },
+    "accountNumber": {
+      "type": "string",
+      "description": "The last 4 digits of the customer's credit card number"
+    },
+    "source": {
+      "type": "string",
+      "description": "The type of application from which the transaction originated"
+    },
+    "orderNumber": {
+      "type": "string",
+      "description": "The transaction's order number"
+    },
+    "reference": {
+      "type": "string",
+      "description": "The transaction's unique reference number"
+    },
+    "batchReference": {
+      "type": "string",
+      "description": "The batch's unique reference number"
+    },
+    "totalAmount": {
+      "type": "number",
+      "description": "The total amount of the transaction"
+    }
+  }
+}

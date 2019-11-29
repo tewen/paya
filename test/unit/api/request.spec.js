@@ -59,6 +59,21 @@ describe('api/request', function () {
       expect(requestPayload.uri).to.equal('d/dots/sticks/bricks/78');
     });
 
+    it('should call request with a uri that includes a query string', function () {
+      request.payaRequest({
+        method: 'GET',
+        route: '/dots/sticks/bricks/78',
+        domain: 'd',
+        clientId: 'c',
+        clientSecret: 'c',
+        merchantId: 'm',
+        merchantKey: 'm',
+        query: { a: true, b: false },
+      });
+      requestPayload = requestLib.args[1][0];
+      expect(requestPayload.uri).to.equal('d/dots/sticks/bricks/78?a=true&b=false');
+    });
+
     it('should call request with json flag', function () {
       expect(requestLib).to.have.been.calledOnce;
       expect(requestPayload.json).to.equal(true);

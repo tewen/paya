@@ -60,6 +60,30 @@ const response = await client.ach.postCharges({
 }));
 ```
 
+#### ach.getCharges(query)
+
+[Paya Documentation](https://developer.sagepayments.com/ach/apis/get/charges)
+
+Used to query charges by various criteria including amount, date, order number, type, etc. Results include both summarized information and itemized detail.
+
+```JavaScript
+const response = await client.ach.getCharges({
+    startDate: '',
+    endDate: '',
+    pageSize: 0,
+    pageNumber: 0,
+    sortDirection: '',
+    sortField: '',
+    name: '',
+    accountNumber: '',
+    source: '',
+    oderNumber: '',
+    reference: '',
+    batchReference: '',
+    totalAmount: 0,
+}));
+```
+
 #### ach.postTokens(data)
 
 [Paya Documentation](https://developer.sagepayments.com/ach/apis/post/tokens)
@@ -92,7 +116,7 @@ const response = await client.ach.putToken(tokenId, {
 });
 ```
 
-#### ach.deleteToken(tokenId    )
+#### ach.deleteToken(tokenId)
 
 [Paya Documentation](https://developer.sagepayments.com/ach/apis/delete/tokens/%7Breference%7D)
 
@@ -101,10 +125,6 @@ Used to delete a vault token.
 ```JavaScript
 const response = await client.ach.deleteToken(tokenId);
 ```
-
-### Upcoming Additions
-
-* ach.getCharges()
 
 ### Contribution Guidelines
 

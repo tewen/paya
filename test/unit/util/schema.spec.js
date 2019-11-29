@@ -107,5 +107,41 @@ describe('util/schema', function () {
           }).error).to.eql('data.billing.name should have required property \'first\'');
       })
     });
+
+    describe('get-charges-request', function () {
+      beforeEach(function () {
+        schema = require('../../../lib/schemas/get-charges-request.json')
+      });
+      
+      it('validates according to schema', function () {
+        expect(validate(
+          schema,
+          {
+            totalAmount: 1,
+          }).valid).to.eql(true);
+      })
+
+      it('validates empty query according to schema', function () {
+        expect(validate(
+          schema,
+          {}).valid).to.eql(true);
+      })
+
+      it('does not validate according to schema', function () {
+        expect(validate(
+          schema,
+          {
+            totalAmount: 'amount',
+          }).valid).to.eql(undefined);
+      })
+
+      it('does not validate according to schema with meaningful error', function () {
+        expect(validate(
+          schema,
+          {
+            totalAmount: 'amount',
+          }).error).to.eql('data.totalAmount should be number');
+      })
+    });
   });
 });
