@@ -12,7 +12,7 @@ describe('ach.postTokens()', async function () {
         type: 'Checking',
         routingNumber: '056008849',
         accountNumber: '12345678901234',
-      }
+      },
     });
     expect(message).to.eql('SUCCESS')
   }).timeout(10000);

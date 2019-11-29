@@ -137,8 +137,6 @@ describe('client', function () {
       });
     });
     
-    
-
     describe('postTokens()', function () {
       it('should call payaRequest()', function () {
         const data = { data: 'in' };

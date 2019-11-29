@@ -9,10 +9,10 @@ describe('ach.deleteToken()', async function () {
     const ach = new ACH(credentials)
     const { vaultResponse: { data: tokenId }} = await ach.postTokens({
       account: {
-        type: "Checking",
-        routingNumber: "056008849",
-        accountNumber: "12345678901234"
-      }
+        type: 'Checking',
+        routingNumber: '056008849',
+        accountNumber: '12345678901234',
+      },
     });
     const { vaultResponse: { message } } = await ach.deleteToken(tokenId);
     expect(message).to.eql('DELETED')
