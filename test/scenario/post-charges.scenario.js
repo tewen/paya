@@ -15,7 +15,7 @@ const {
 
 describe('ach.postCharges()', async function () {
   it('is successful', async function () {
-    const ach = new ACH({ clientId: clientId, clientSecret, merchantId, merchantKey })
+    const ach = new ACH({ clientId, clientSecret, merchantId, merchantKey })
     const { vaultResponse: { message } } = await ach.postTokens({
       account: {
         type: "Checking",

@@ -3,6 +3,8 @@ const { getAuthorization, getNonce, getRoute, getTimestamp } = require('../../..
 
 describe('api/helpers/request', function () {
   describe('getAuthorization()', function () {
+    const hmacKey = 'c5DAKh3a6fhf6ZicZMo6lVn/Wj8808Ni2Sg+eui/0m1mNrYxdLXLXeGcEbxZxXpViEjfLKuLP+a2by1lIoEr/Q==';
+    
     it('should return hmac key', function () {
       expect(getAuthorization({
         method: 'm',
@@ -12,7 +14,7 @@ describe('api/helpers/request', function () {
         nonce: 'n',
         timestamp: 't',
         clientSecret: 'c',
-      })).to.equal('c5DAKh3a6fhf6ZicZMo6lVn/Wj8808Ni2Sg+eui/0m1mNrYxdLXLXeGcEbxZxXpViEjfLKuLP+a2by1lIoEr/Q==');
+      })).to.equal(hmacKey);
     });
 
     it('should return a different hmac key', function () {
@@ -24,7 +26,7 @@ describe('api/helpers/request', function () {
         nonce: 'n',
         timestamp: 't',
         clientSecret: 'c',
-      })).to.not.equal('c5DAKh3a6fhf6ZicZMo6lVn/Wj8808Ni2Sg+eui/0m1mNrYxdLXLXeGcEbxZxXpViEjfLKuLP+a2by1lIoEr/Q==');
+      })).to.not.equal(hmacKey);
     });
   });
 

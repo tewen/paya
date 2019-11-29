@@ -37,7 +37,7 @@ describe('api/request', function () {
   describe('payaRequest()', function () {
     beforeEach(function () {
       request.payaRequest({
-        method: 'GET',
+        method: 'POST',
         route: '/dots/sticks/bricks/78',
         domain: 'd',
         clientId: 'c',
@@ -49,9 +49,24 @@ describe('api/request', function () {
       requestPayload = requestLib.args[0][0];
     });
 
-    it('should call request with a GET method', function () {
+    it('should call request with a POST method', function () {
       expect(requestLib).to.have.been.calledOnce;
-      expect(requestPayload.method).to.equal('GET');
+      expect(requestPayload.method).to.equal('POST');
+    });
+
+    it('should call request with a uri', function () {
+      expect(requestLib).to.have.been.calledOnce;
+      expect(requestPayload.uri).to.equal('d/dots/sticks/bricks/78');
+    });
+
+    it('should call request with json flag', function () {
+      expect(requestLib).to.have.been.calledOnce;
+      expect(requestPayload.json).to.equal(true);
+    });
+
+    it('should call request with a body', function () {
+      expect(requestLib).to.have.been.calledOnce;
+      expect(requestPayload.body).to.equal('d');
     });
 
     it('should apply the correct headers', function () {
@@ -62,7 +77,7 @@ describe('api/request', function () {
         nonce: 'nonce',
         timestamp: 'timestamp',
         authorization: {
-          method: 'GET',
+          method: 'POST',
           uri: 'd/dots/sticks/bricks/78',
           data: 'd',
           merchantId: 'm',
@@ -74,19 +89,19 @@ describe('api/request', function () {
       });
     });
 
-    it('should call getAuthorization', function () {
+    it('should call getAuthorization()', function () {
       expect(requestHelpers.getAuthorization).to.have.been.calledOnce;
     });
 
-    it('should call getNonce', function () {
+    it('should call getNonce()', function () {
       expect(requestHelpers.getNonce).to.have.been.calledOnce;
     });
 
-    it('should call getRoute', function () {
+    it('should call getRoute()', function () {
       expect(requestHelpers.getRoute).to.have.been.calledOnce;
     });
     
-    it('should call getTimestamp', function () {
+    it('should call getTimestamp()', function () {
       expect(requestHelpers.getTimestamp).to.have.been.calledOnce;
     });
 
