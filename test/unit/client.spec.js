@@ -110,6 +110,35 @@ describe('client', function () {
       });
     });
 
+    describe('postCharges()', function () {
+      it('should call payaRequest()', function () {
+        const data = { data: 'in' };
+        ach.postCharges(data);
+        expect(payaRequest).to.have.been.calledOnce;
+        expect(payaRequest).to.have.been.calledWith({
+          method: 'POST',
+          route: 'charges',
+          data,
+          clientId: 'ci',
+          clientSecret: 'cs',
+          domain: 'https://api-cert.sagepayments.com/ach/v1',
+          merchantId: 'mi',
+          merchantKey: 'mk',
+        });
+      });
+  
+      it('should return a promise that resolves from the result of payaRequest()', async function () {
+        const response = await ach.postCharges();
+        expect(response).to.eql({ state: 'SUCCESSFUL' });
+      });
+  
+      it('should throw an error if input validation fails', function () {
+        expect(() => ach.postCharges('notValid')).to.throw(SchemaValidationError);
+      });
+    });
+    
+    
+
     describe('postTokens()', function () {
       it('should call payaRequest()', function () {
         const data = { data: 'in' };
@@ -190,12 +219,6 @@ describe('client', function () {
     describe('getCharges()', function () {
       it('should throw a NotImplementedError', function () {
         expect(() => ach.getCharges()).to.throw(NotImplementedError);
-      });
-    });
-  
-    describe('postCharges()', function () {
-      it('should throw a NotImplementedError', function () {
-        expect(() => ach.postCharges()).to.throw(NotImplementedError);
       });
     });
   });

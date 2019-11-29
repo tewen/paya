@@ -30,6 +30,36 @@ const client = new PayaClient({
 
 ### Methods
 
+#### ach.postCharges(data)
+
+[Paya Documentation](https://developer.sagepayments.com/ach/apis/post/charges)
+
+Used to process a charge / Sale transactions in a single request.
+
+```JavaScript
+const response = await client.ach.postCharges({
+    secCode: '',
+    amounts: {
+        total: 0,
+    },
+    account: {
+        type: '',
+        routingNumber: '',
+        accountNumber: '',
+    },
+    billing: {
+        name: {
+            first: '',
+            last: '',
+        },
+        address: '',
+        city: '',
+        state: '',
+        postalCode: '',
+    },
+}));
+```
+
 #### ach.postTokens(data)
 
 [Paya Documentation](https://developer.sagepayments.com/ach/apis/post/tokens)
@@ -43,7 +73,7 @@ const response = await client.ach.postTokens({
         routingNumber: '',
         accountNumber: '',
     });
-})
+});
 ```
 
 #### ach.putToken(tokenId, data)
@@ -59,7 +89,7 @@ const response = await client.ach.putToken(tokenId, {
         routingNumber: '',
         accountNumber: '',
     });
-})
+});
 ```
 
 #### ach.deleteToken(tokenId    )
@@ -70,12 +100,10 @@ Used to delete a vault token.
 
 ```JavaScript
 const response = await client.ach.deleteToken(tokenId);
-})
 ```
 
 ### Upcoming Additions
 
-* ach.postCharges()
 * ach.getCharges()
 
 ### Contribution Guidelines
