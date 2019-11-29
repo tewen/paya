@@ -1,21 +1,12 @@
 /* eslint-env mocha */
-require('dotenv').config();
-
 const chai = require('chai');
 const { expect } = chai;
-
 const { ACH } = require('../../lib/client');
+const credentials = require('./credentials');
 
-const {
-  SANDBOX_CLIENT_ID: clientId,
-  SANDBOX_CLIENT_SECRET: clientSecret,
-  SANDBOX_MERCHANT_ID: merchantId,
-  SANDBOX_MERCHANT_KEY: merchantKey
-} = process.env;
-
-describe('ach.postCharges()', async function () {
+describe('ach.postTokens()', async function () {
   it('is successful', async function () {
-    const ach = new ACH({ clientId, clientSecret, merchantId, merchantKey })
+    const ach = new ACH(credentials)
     const { vaultResponse: { message } } = await ach.postTokens({
       account: {
         type: "Checking",

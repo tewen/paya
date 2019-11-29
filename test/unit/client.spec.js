@@ -137,6 +137,34 @@ describe('client', function () {
       });
     });
     
+    describe('putToken()', function () {
+      it('should call payaRequest()', function () {
+        const tokenId = 'tokenId';
+        const data = { data: 'in' };
+        ach.putToken(tokenId, data);
+        expect(payaRequest).to.have.been.calledOnce;
+        expect(payaRequest).to.have.been.calledWith({
+          method: 'PUT',
+          route: `tokens/${tokenId}`,
+          data,
+          clientId: 'ci',
+          clientSecret: 'cs',
+          domain: 'https://api-cert.sagepayments.com/ach/v1',
+          merchantId: 'mi',
+          merchantKey: 'mk',
+        });
+      });
+  
+      it('should return a promise that resolves from the result of payaRequest()', async function () {
+        const response = await ach.putToken();
+        expect(response).to.eql({ state: 'SUCCESSFUL' });
+      });
+  
+      it('should throw an error if input validation fails', function () {
+        expect(() => ach.putToken('', 'notValid')).to.throw(SchemaValidationError);
+      });
+    });
+  
     describe('getCharges()', function () {
       it('should throw a NotImplementedError', function () {
         expect(() => ach.getCharges()).to.throw(NotImplementedError);
@@ -146,12 +174,6 @@ describe('client', function () {
     describe('postCharges()', function () {
       it('should throw a NotImplementedError', function () {
         expect(() => ach.postCharges()).to.throw(NotImplementedError);
-      });
-    });
-  
-    describe('putToken()', function () {
-      it('should throw a NotImplementedError', function () {
-        expect(() => ach.putToken()).to.throw(NotImplementedError);
       });
     });
   
