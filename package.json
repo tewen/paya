@@ -1,6 +1,6 @@
 {
   "name": "paya",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Node module for the Paya payment API.",
   "main": "index.js",
   "scripts": {
