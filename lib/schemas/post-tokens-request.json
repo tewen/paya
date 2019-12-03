@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "required": [
+    "account"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "account": {
+      "type": "object",
+      "required": [
+        "type",
+        "routingNumber",
+        "accountNumber"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of bank account from which the funds are being withdrawn",
+          "enum": [
+            "Checking",
+            "Savings"
+          ],
+          "default": "Checking"
+        },
+        "routingNumber": {
+          "type": "string",
+          "description": "The customer's account routing number",
+          "pattern": "^[\\w'\\-\\s\\.,#\\/]{0,}$",
+          "default": "056008849"
+        },
+        "accountNumber": {
+          "type": "string",
+          "description": "The customer's account number",
+          "pattern": "^[\\w\\-\\s\\/\\+\\=]{1,}$",
+          "default": "12345678901234"
+        }
+      }
+    }
+  }
+}

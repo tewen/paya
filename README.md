@@ -1,6 +1,6 @@
 ## Paya
 
-Coming soon, node module for the [Paya](https://docs.payaconnect.com/developers/api) REST API.
+This project is an open source node module for the [Paya](https://developer.sagepayments.com/apis) REST API.
 
 ### Installation
 
@@ -9,23 +9,153 @@ npm install -g paya
 npm install --save paya
 ```
 
-### Getting Started as a Contributor
+### Getting Started
+
+In order to call the Paya API, you will need to be setup with:
+* client id
+* client secret
+* merchant id
+* merchant key
+
+```JavaScript
+const PayaClient = require('paya');
+
+const client = new PayaClient({
+    clientId,
+    clientSecret,
+    merchantId,
+    merchantKey,
+});
+```
+
+### Methods
+
+#### ach.postCharges(data)
+
+[Paya Documentation](https://developer.sagepayments.com/ach/apis/post/charges)
+
+Used to process a charge / Sale transactions in a single request.
+
+```JavaScript
+const response = await client.ach.postCharges({
+    secCode: '',
+    amounts: {
+        total: 0,
+    },
+    account: {
+        type: '',
+        routingNumber: '',
+        accountNumber: '',
+    },
+    billing: {
+        name: {
+            first: '',
+            last: '',
+        },
+        address: '',
+        city: '',
+        state: '',
+        postalCode: '',
+    },
+}));
+```
+
+#### ach.getCharges(query)
+
+[Paya Documentation](https://developer.sagepayments.com/ach/apis/get/charges)
+
+Used to query charges by various criteria including amount, date, order number, type, etc. Results include both summarized information and itemized detail.
+
+```JavaScript
+const response = await client.ach.getCharges({
+    startDate: '',
+    endDate: '',
+    pageSize: 0,
+    pageNumber: 0,
+    sortDirection: '',
+    sortField: '',
+    name: '',
+    accountNumber: '',
+    source: '',
+    oderNumber: '',
+    reference: '',
+    batchReference: '',
+    totalAmount: 0,
+}));
+```
+
+#### ach.postTokens(data)
+
+[Paya Documentation](https://developer.sagepayments.com/ach/apis/post/tokens)
+
+Used to store an account and retrieve a vault token. A vault token allows you to process a charge or credit without knowing the Routing number and Account number.
+
+```JavaScript
+const response = await client.ach.postTokens({
+    account: {
+        type: '',
+        routingNumber: '',
+        accountNumber: '',
+    });
+});
+```
+
+#### ach.putToken(tokenId, data)
+
+[Paya Documentation](https://developer.sagepayments.com/ach/apis/put/tokens/%7Breference%7D)
+
+Used to update the account data associated with a vault token.
+
+```JavaScript
+const response = await client.ach.putToken(tokenId, {
+    account: {
+        type: '',
+        routingNumber: '',
+        accountNumber: '',
+    });
+});
+```
+
+#### ach.deleteToken(tokenId)
+
+[Paya Documentation](https://developer.sagepayments.com/ach/apis/delete/tokens/%7Breference%7D)
+
+Used to delete a vault token.
+
+```JavaScript
+const response = await client.ach.deleteToken(tokenId);
+```
+
+### Contribution Guidelines
 
 We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage node versions. This project was created using 12.13.0.
 
+Fork the respository and install all the dependencies:
+
 ```BASH
 npm install
+```
+
+Run the npm setup script in the project root directory:
+
+```BASH
 npm run setup
 ```
 
-Please write tests and run tests and linting before any pull request.
+Make sure to run the unit tests and linting before committing. Obviously, add to the tests as you make changes:
 
 ```BASH
-npm test
+npm run test
 ```
 
-### Notes
+For watch:
 
-Project just started, stay tuned for more updates.
+```BASH
+npm run test:watch
+```
 
+You can also run the scenario tests against the live API:
 
+```BASH
+npm run test-scenario
+```

@@ -4,13 +4,14 @@ const { expect } = chai;
 const { ACH } = require('../../lib/client');
 const credentials = require('./credentials');
 
-describe('ach.postCharges()', async function () {
+describe('ach.getCharges()', async function () {
   it('is successful', async function () {
     const ach = new ACH(credentials);
-    const { status } = await ach.postCharges({
+    const total = Date.now();
+    await ach.postCharges({
       secCode: 'PPD',
       amounts: {
-        total: 1,
+        total,
       },
       account: {
         type: 'Checking',
@@ -28,6 +29,9 @@ describe('ach.postCharges()', async function () {
         postalCode: 'postalCode',
       },
     });
-    expect(status).to.eql('Approved');
+    const { totalItemCount } = await ach.getCharges({
+      totalAmount: total,
+    });
+    expect(totalItemCount).to.eql(1);
   }).timeout(10000);
 });
