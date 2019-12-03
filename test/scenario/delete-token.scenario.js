@@ -6,7 +6,7 @@ const credentials = require('./credentials');
 
 describe('ach.deleteToken()', async function () {
   it('is successful', async function () {
-    const ach = new ACH(credentials)
+    const ach = new ACH(credentials);
     const { vaultResponse: { data: tokenId }} = await ach.postTokens({
       account: {
         type: 'Checking',
@@ -15,6 +15,6 @@ describe('ach.deleteToken()', async function () {
       },
     });
     const { vaultResponse: { message } } = await ach.deleteToken(tokenId);
-    expect(message).to.eql('DELETED')
+    expect(message).to.eql('DELETED');
   }).timeout(10000);
 });

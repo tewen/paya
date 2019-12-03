@@ -6,7 +6,7 @@ const credentials = require('./credentials');
 
 describe('ach.getCharges()', async function () {
   it('is successful', async function () {
-    const ach = new ACH(credentials)
+    const ach = new ACH(credentials);
     const total = Date.now();
     await ach.postCharges({
       secCode: 'PPD',
@@ -32,6 +32,6 @@ describe('ach.getCharges()', async function () {
     const { totalItemCount } = await ach.getCharges({
       totalAmount: total,
     });
-    expect(totalItemCount).to.eql(1)
+    expect(totalItemCount).to.eql(1);
   }).timeout(10000);
 });

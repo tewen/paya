@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 const { InitializationError, SchemaValidationError } = require('../../lib/util/error');
 
-chai.use(require('sinon-chai'))
+chai.use(require('sinon-chai'));
 
 describe('client', function () {
   let sandbox;
@@ -41,7 +41,7 @@ describe('client', function () {
   describe('constructor()', function () {
     it('should set ach on the instance', function () {
       expect(client.ach).to.not.be.undefined;
-    })
+    });
   });
 
   describe('ach', function () {

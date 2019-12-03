@@ -8,6 +8,10 @@
       "error",
       "module.exports"
     ],
+    "semi": [
+      "error",
+      "always"
+    ],
     "node/prefer-global/buffer": [
       "error",
       "always"

@@ -6,7 +6,7 @@ const credentials = require('./credentials');
 
 describe('ach.putToken()', async function () {
   it('is successful', async function () {
-    const ach = new ACH(credentials)
+    const ach = new ACH(credentials);
     const { vaultResponse: { data: tokenId }} = await ach.postTokens({
       account: {
         type: 'Checking',
@@ -21,6 +21,6 @@ describe('ach.putToken()', async function () {
         accountNumber: '12345678901234',
       },
     });
-    expect(message).to.eql('SUCCESS')
+    expect(message).to.eql('SUCCESS');
   }).timeout(10000);
 });

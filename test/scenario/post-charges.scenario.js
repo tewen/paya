@@ -6,7 +6,7 @@ const credentials = require('./credentials');
 
 describe('ach.postCharges()', async function () {
   it('is successful', async function () {
-    const ach = new ACH(credentials)
+    const ach = new ACH(credentials);
     const { status } = await ach.postCharges({
       secCode: 'PPD',
       amounts: {
@@ -28,6 +28,6 @@ describe('ach.postCharges()', async function () {
         postalCode: 'postalCode',
       },
     });
-    expect(status).to.eql('Approved')
+    expect(status).to.eql('Approved');
   }).timeout(10000);
 });
